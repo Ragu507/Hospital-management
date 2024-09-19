@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hospital Management System{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-green-500 p-4">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <a href="{% url 'dashboard' %}" class="text-white text-lg font-bold">Hospital Management</a>
+                <div class="space-x-4">
+                    <a href="{% url 'patient_list' %}" class="text-white hover:underline">Patients</a>
+                    <a href="{% url 'doctor_list' %}" class="text-white hover:underline">Doctors</a>
+                    <a href="{% url 'appointment_list' %}" class="text-white hover:underline">Appointments</a>
+                    <a href="{% url 'billing_list' %}" class="text-white hover:underline">Billing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="container mx-auto mt-10">
+        {% block content %}
+        <!-- Main content will be inserted here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-green-500 mt-10 p-4 text-center text-white">
+        <p>&copy; 2024 Hospital Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

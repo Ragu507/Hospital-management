@@ -1,0 +1,61 @@
+<!-- dashboard.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
+
+    <div class="grid grid-cols-4 gap-4">
+        <!-- Total Patients -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold">Total Patients</h2>
+            <p class="text-3xl">{{ total_patients }}</p>
+        </div>
+
+        <!-- Total Doctors -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold">Total Doctors</h2>
+            <p class="text-3xl">{{ total_doctors }}</p>
+        </div>
+
+        <!-- Total Appointments -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold">Total Appointments</h2>
+            <p class="text-3xl">{{ total_appointments }}</p>
+        </div>
+
+        <!-- Total Bills -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold">Total Bills</h2>
+            <p class="text-3xl">{{ total_bills }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mt-10">
+        <!-- Billing Summary -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Billing Summary</h2>
+            <p><strong>Total Revenue:</strong> ${{ total_revenue }}</p>
+            <p><strong>Unpaid Billing Amount:</strong> ${{ unpaid_billing_amount }}</p>
+            <p><strong>Paid Bills:</strong> {{ total_paid_bills }}</p>
+            <p><strong>Unpaid Bills:</strong> {{ total_unpaid_bills }}</p>
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="bg-white p-6 rounded shadow">
+            <h2 class="text-xl font-semibold mb-2">Upcoming Appointments</h2>
+            <ul>
+                {% for appointment in upcoming_appointments %}
+                <li class="mb-2">
+                    <strong>{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</strong> 
+                    - Dr. {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}
+                    <span class="block text-gray-600">{{ appointment.appointment_date }}</span>
+                </li>
+                {% empty %}
+                <p>No upcoming appointments.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

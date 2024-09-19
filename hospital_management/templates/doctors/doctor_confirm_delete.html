@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Doctor{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-6">Delete Doctor</h1>
+
+    <p class="mb-4">Are you sure you want to delete <strong>{{ object.first_name }} {{ object.last_name }}</strong>? This action cannot be undone.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+        <a href="{% url 'doctor_list' %}" class="ml-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</a>
+    </form>
+</div>
+{% endblock %}

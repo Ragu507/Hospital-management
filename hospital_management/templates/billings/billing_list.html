@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Billing List{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-6">Billing List</h1>
+
+    <div class="mb-4">
+        <a href="{% url 'billing_create' %}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create New Billing</a>
+    </div>
+
+    <table class="min-w-full bg-white border rounded-lg shadow">
+        <thead>
+            <tr class="bg-green-500 text-white">
+                <th class="py-2 px-4 border-b">Patient</th>
+                <th class="py-2 px-4 border-b">Appointment</th>
+                <th class="py-2 px-4 border-b">Total Amount</th>
+                <th class="py-2 px-4 border-b">Payment Status</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for billing in billings %}
+            <tr>
+                <td class="py-2 px-4 border-b">{{ billing.patient }}</td>
+                <td class="py-2 px-4 border-b">{{ billing.appointment }}</td>
+                <td class="py-2 px-4 border-b">${{ billing.total_amount }}</td>
+                <td class="py-2 px-4 border-b">{{ billing.get_payment_status_display }}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'billing_update' billing.id %}" class="text-blue-500 hover:underline">Edit</a> | 
+                    <a href="{% url 'billing_delete' billing.id %}" class="text-red-500 hover:underline">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center py-4">No billings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

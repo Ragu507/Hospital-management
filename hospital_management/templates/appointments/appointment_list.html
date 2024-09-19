@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Appointment List{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-2xl font-bold mb-6">Appointment List</h1>
+
+    <div class="mb-4">
+        <a href="{% url 'appointment_create' %}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-blue-600">Schedule New Appointment</a>
+    </div>
+
+    <table class="min-w-full bg-white border rounded-lg shadow">
+        <thead>
+            <tr class="bg-green-500 text-white">
+                <th class="py-2 px-4 border-b">Patient</th>
+                <th class="py-2 px-4 border-b">Doctor</th>
+                <th class="py-2 px-4 border-b">Date</th>
+                <th class="py-2 px-4 border-b">Symptoms</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td class="py-2 px-4 border-b">{{ appointment.patient }}</td>
+                <td class="py-2 px-4 border-b">{{ appointment.doctor }}</td>
+                <td class="py-2 px-4 border-b">{{ appointment.appointment_date }}</td>
+                <td class="py-2 px-4 border-b">{{ appointment.symptoms }}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="{% url 'appointment_update' appointment.id %}" class="text-blue-500 hover:underline">Edit</a> | 
+                    <a href="{% url 'appointment_delete' appointment.id %}" class="text-red-500 hover:underline">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center py-4">No appointments found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
